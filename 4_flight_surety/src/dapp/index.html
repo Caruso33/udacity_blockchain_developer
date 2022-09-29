@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>FlightSurety</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">FlightSurety</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <main>
+      <div class="container">
+        <div id="display-wrapper"></div>
+
+        <h2>Contract Administration</h2>
+        <div class="row">
+          <label class="col-6 field">App Contract Address</label>
+          <label class="col-6 field">Data Contract Address</label>
+        </div>
+
+        <div class="row">
+          <div class="input-group col-6">
+            <input
+              type="text"
+              id="app-contract-address"
+              class="form-control"
+              placeholder="0x0"
+              disabled
+            />
+          </div>
+          <div class="input-group col-6">
+            <input
+              type="text"
+              id="data-contract-address"
+              class="form-control"
+              placeholder="0x0"
+              disabled
+            />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="authorize-app-contract"
+            >
+              Authorize App Contract
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-6 field">Data Contract Status</label>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label mr-1" for="data-operational">
+                Operational
+              </label>
+
+              <input
+                class="form-check-input"
+                type="radio"
+                name="data-isoperational"
+                id="data-operational"
+                value="true"
+              />
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label mr-1" for="data-not-operational">
+                Not Operational
+              </label>
+
+              <input
+                class="form-check-input"
+                type="radio"
+                name="data-isoperational"
+                id="data-not-operational"
+                value="false"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id="get-data-contract-status"
+            >
+              Get Data Contract Status
+            </button>
+
+            <button
+              class="btn btn-primary ml-1"
+              type="button"
+              id="set-data-contract-status"
+            >
+              Set New Data Contract Status
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 
+      <div class="row">
+        <div class="input-group col-12">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="0x0"
+            id="app-contract-address"
+          />
+
+          <div class="input-group-append">
+            <button
+              class="form-control btn btn-primary"
+              type="button"
+              id="authorize-app-contract"
+            >
+              Authorize
+            </button>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="container">
+        <div id="display-wrapper" class=""></div>
+
+        <div id="airline-registry">
+          <h2>Airline Management</h2>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-4 field">Active Airlines </label>
+          <label class="col-4 field">Registered Airlines </label>
+          <label class="col-4 field">Unregistered Airlines </label>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <select id="active-airlines" class="custom-select">
+              <option>Active Airline</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <select id="registered-airlines" class="custom-select">
+              <option>Registered Airline</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <select id="unregistered-airlines" class="custom-select">
+              <option>Unregistered Airline</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <button class="btn btn-secondary" type="button" name="get-airlines">
+              Get Airlines
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-4 field">Airline Address </label>
+          <label class="col-4 field">Airline Name </label>
+        </div>
+
+        <div class="row">
+          <div class="input-group col-4">
+            <select id="new-airline-address" class="custom-select">
+              <option>Airline</option>
+            </select>
+          </div>
+          <div class="input-group col-4">
+            <input
+              type="text"
+              id="new-airline-name"
+              class="form-control"
+              placeholder="Airline XYZ"
+            />
+          </div>
+
+          <div class="input-group col-4">
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="register-new-airline"
+            >
+              Register New Airline
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="input-group col-4">
+            <input
+              type="number"
+              id="fund-airline-amount"
+              class="form-control"
+              placeholder="Funding: X Ether"
+            />
+          </div>
+
+          <div class="col-4">
+            <select class="custom-select" id="funding-airlines">
+              <option>Funding Airline</option>
+            </select>
+          </div>
+
+          <div class="input-group col-4">
+            <button class="btn btn-primary" type="button" id="fund-airline">
+              Fund Airline
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <select class="custom-select" id="airline-to-vote-for">
+              <option>Airline to Vote for</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <select class="custom-select" id="voting-airline">
+              <option>Voting Airline</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <button class="btn btn-primary" type="button" id="vote-airline">
+              Vote for Airline
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div id="flight-registration col-12">
+          <h2>Flight Management</h2>
+        </div>
+
+        <div class="row">
+          <label class="col-4 field" for="flight-airlines">Airline </label>
+          <label class="col-4 field" for="flight-name">Flight Name</label>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <select class="custom-select text-truncate" id="flight-airlines">
+              <option>Airlines</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-name"
+              class="form-control"
+              placeholder="Flight XYZ"
+            />
+          </div>
+
+          <div class="input-group col-4">
+            <input
+              type="number"
+              id="insurance-amount"
+              class="form-control"
+              placeholder="Max Insurance: X Ether"
+            />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <button class="btn btn-secondary" type="button" name="get-airlines">
+              Get Airlines
+            </button>
+
+            <button class="btn btn-primary" id="register-flight">
+              Register Flight
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <select class="custom-select text-truncate" id="airline-flights">
+              <option>Flights</option>
+            </select>
+          </div>
+
+          <div class="col-6">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id="get-flights-management"
+            >
+              Get Flights
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <button class="btn btn-primary" type="button" id="freeze-flight">
+              Freeze Flight
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-4 field">Number Insurees</label>
+          <label class="col-4 field">Payout Amount</label>
+          <label class="col-4 field">Payout Addresses</label>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <input
+              type="number"
+              id="number-insurees"
+              class="form-control"
+              placeholder="Number of Insurees"
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="number"
+              id="payout-amount"
+              class="form-control"
+              placeholder="Payout Amount"
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              id="payout-addresses"
+              class="form-control"
+              placeholder="Payout Addresses"
+            />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="get-registered-payouts"
+            >
+              Get Registered Payouts
+            </button>
+
+            <button
+              class="btn btn-primary ml-1"
+              type="button"
+              id="payout-insurees"
+            >
+              Payout Insurees
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div id="flight-registration col-12">
+          <h2>Flight Status</h2>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <select class="custom-select text-truncate" id="status-airlines">
+              <option>Airlines</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <select class="custom-select text-truncate" id="status-flights">
+              <option>Flights</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <button class="btn btn-secondary" type="button" name="get-airlines">
+              Get Airlines
+            </button>
+
+            <button
+              class="btn btn-secondary ml-1"
+              type="button"
+              id="get-flights-status"
+            >
+              Get Flights
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-4 field">Flight Status</label>
+          <label class="col-4 field">Freeze Timestamp</label>
+          <label class="col-4 field">Last updated Timestamp</label>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-status"
+              class="form-control"
+              placeholder="Flight status"
+              disabled
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-freezeTimestamp"
+              class="form-control"
+              placeholder="Flight freeze time"
+              disabled
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-lastUpdatedTimestamp"
+              class="form-control"
+              placeholder="Flight last updated"
+              disabled
+            />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <label class="col-4 field">Flight has landed</label>
+          <label class="col-4 field">Flight Insurance Price (Ether)</label>
+          <label class="col-4 field">Insurancees (no. addresses)</label>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-landed"
+              class="form-control"
+              placeholder="Flight has landed"
+              disabled
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-insurancePrice"
+              class="form-control"
+              placeholder="Flight insurance price"
+              disabled
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              id="flight-insuranceaddresses"
+              class="form-control"
+              placeholder="Flight insurees"
+              disabled
+            />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id="get-flight-status"
+            >
+              Get Flight Status
+            </button>
+
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="request-flight-status"
+            >
+              Request New Flight Status
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Passenger Actions</h2>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <select class="custom-select text-truncate" id="insurance-airlines">
+              <option>Airlines</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <select class="custom-select text-truncate" id="insurance-flights">
+              <option>Flights</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <button class="btn btn-secondary" type="button" name="get-airlines">
+              Get Airlines
+            </button>
+
+            <button
+              class="btn btn-secondary ml-1"
+              type="button"
+              id="get-flights-passenger"
+            >
+              Get Flights
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="input-group col-4">
+            <select
+              class="custom-select text-truncate"
+              id="flight-insurance-insurees"
+            >
+              <option>Insuree Address</option>
+            </select>
+          </div>
+          <div class="input-group col-4">
+            <input
+              type="number"
+              id="insurance-amount"
+              class="form-control"
+              placeholder="Insurance: X Ether"
+            />
+          </div>
+
+          <div class="input-group col-4">
+            <button class="btn btn-primary" type="button" id="buy-insurance">
+              Buy Insurance
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h2 id="transaction-logs">Transaction Logs</h2>
+        <div>
+          <h3>New Events</h3>
+          <ul id="log-events">
+            <!-- Events will appear here from app.js -->
+          </ul>
+          <br />
+          <hr />
+          <h3>Past Events</h3>
+          <ul id="past-log-events">
+            <!-- Events will appear here from app.js -->
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- <script src="dapp/js/index.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

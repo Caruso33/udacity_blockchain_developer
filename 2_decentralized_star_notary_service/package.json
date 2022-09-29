@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "truffle test"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "truffle": "5.0.2",
+    "truffle-hdwallet-provider": "^1.0.17"
+  }
+}
